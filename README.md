@@ -6,3 +6,4 @@
    - Grow the snake when eating
 2. Scoreboard
 3. Check if the game has ended
+
