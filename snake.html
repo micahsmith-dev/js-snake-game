@@ -53,10 +53,16 @@
         // according to the horizontal velocity and the y - coordinates of its parts
         // according to the vertical velocity
         function advanceSnake() {
-            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-            snake.unshift(head);
-        }
-        snake.pop();
+                const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+                snake.unshift(head);
+                const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+                if (didEatFood) {
+                    createFood();
+                } else {
+                    snake.pop();
+                }
+            }
+            snake.pop();
         // Draw the snake on the canvas
         function drawSnake() {
             // Loop through the snake parts drawing each part on the canvas
