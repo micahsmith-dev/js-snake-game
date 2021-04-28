@@ -2,7 +2,5 @@
 
 ## Things Needed to be Added:
 
-1. Generate food for the snake (DONE)
-   - Grow the snake when eating
-2. Scoreboard
-3. Check if the game has ended
+1. Scoreboard
+2. Check if the game has ended
