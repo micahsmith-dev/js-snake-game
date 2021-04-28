@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <div id="score"></div>
     <canvas id="gameCanvas" width="300" height="300"></canvas>
     <script>
         // CONSTANTS
@@ -23,6 +24,8 @@
             { x: 120, y: 150 },
             { x: 110, y: 150 }
         ]
+        // Score
+        var score = 0;
         // Horizontal velocity
         let dx = 10;
         // Vertical velocity
@@ -53,16 +56,19 @@
         // according to the horizontal velocity and the y - coordinates of its parts
         // according to the vertical velocity
         function advanceSnake() {
-                const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-                snake.unshift(head);
-                const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
-                if (didEatFood) {
-                    createFood();
-                } else {
-                    snake.pop();
-                }
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+            snake.unshift(head);
+            const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+            if (didEatFood) {
+                // Update score when eating food
+                score += 10;
+                document.getElementById('score').innerHTML = score;
+                createFood();
+            } else {
+                snake.pop();
             }
-            snake.pop();
+        }
+        snake.pop();
         // Draw the snake on the canvas
         function drawSnake() {
             // Loop through the snake parts drawing each part on the canvas
@@ -137,6 +143,23 @@
                 drawSnake();
                 main();
             }, 100)
+        }
+        function didGameEnd() {
+            for (let i = 4; i < snake.length; i++) {
+                // If snake's head touches another part of the snake
+                // return true
+                const didCollide = snake[i].x === snake[0].x &&
+                    snake[i].y === snake[0].y
+                if (didCollide) return true
+            }
+            const hitLeftWall = snake[0].x < 0;
+            const hitRightWall = snake[0].x > gameCanvas.width - 10;
+            const hitTopWall = snake[0].y < 0;
+            const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+            return hitLeftWall ||
+                hitRightWall ||
+                hitTopWall ||
+                hitBottomWall
         }
     </script>
 </body>

@@ -1,6 +1,3 @@
-# THE PROJECT IS NOT YET FINISHED
+# HOW TO PLAY:
 
-## Things Needed to be Added:
-
-1. Scoreboard
-2. Check if the game has ended
+Arrow keys (←, ↓, ↑, →)
